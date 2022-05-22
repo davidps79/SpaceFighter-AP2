@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+   <center>
+      <Canvas fx:id="gameCanvas" height="800.0" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" width="800.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
