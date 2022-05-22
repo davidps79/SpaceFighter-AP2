@@ -1,20 +1,33 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Fighter {
 	private float x;
+	private float y;
 	private float dx;
 	private float acceleration;
 	private float minSpeed;
 	private float maxSpeed;
-	private boolean isMoving;
+	private boolean isMovingLeft;
+	private boolean isMovingRight;
+	private boolean canShoot;
+	private boolean isShooting;
+	private Queue<Bullet> bullets;
 	
 	public Fighter() {
 		this.x = 400;
+		this.y = 600;
 		this.dx = 1f;
-		this.acceleration = 0.5f;
+		this.acceleration = 0.7f;
 		this.minSpeed = dx;
-		this.maxSpeed = 7f;
-		this.isMoving = false;
+		this.maxSpeed = 6f;
+		this.isMovingLeft = false;
+		this.isMovingRight = false;
+		this.canShoot = true;
+		this.isShooting = false;
+		this.bullets = new LinkedList<>();
 	}
 	
 	public float getX() {
@@ -41,30 +54,94 @@ public class Fighter {
 		this.acceleration = acceleration;
 	}
 	
-	public void moveX(int direction) {	
-		if (!isMoving) {
-			isMoving = true;
-			Thread th = new Thread(() -> {
-				while(isMoving) {
+	public void moveLeft() {
+		if (isMovingRight) stopX();
+		
+		if (!isMovingLeft) {
+			isMovingLeft = true;
+			Thread move = new Thread(() -> {
+				while(isMovingLeft) {
 					try {
-						if (isMoving) {
-							Thread.sleep(60);
-							if (dx<maxSpeed)
-								dx+=acceleration;
-						}
-					} catch (Exception e) {
+						Thread.sleep(25);
+						if (dx<maxSpeed)
+							dx+=acceleration;
+						x -= dx;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+			
+			move.setDaemon(true);
+			move.start();
+		}
+	}
+	
+	public void moveRight() {
+		if (isMovingLeft) stopX();
+		
+		if (!isMovingRight) {
+			isMovingRight = true;
+			
+			Thread move = new Thread(() -> {
+				while(isMovingRight) {
+					try {
+						Thread.sleep(25);
+						if (dx<maxSpeed)
+							dx+=acceleration;
+						x += dx;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+			
+			move.setDaemon(true);
+			move.start();
+		}
+	}
+
+	public void stopX() {
+		isMovingRight = false;
+		isMovingLeft = false;
+		dx = minSpeed;
+	}
+
+	public float getY() {
+		return y;
+	}
+	
+	public void shoot() {
+		if (!isShooting) {
+			isShooting = true;	
+			Thread startShooting = new Thread(() -> {
+				while (isShooting) {
+					if (canShoot) {
+						bullets.add(new Bullet(getX()+20, getY()-10, bullets));
+						canShoot = false;
+					}
+
+					try {
+						Thread.sleep(500);
+						canShoot = true;
+					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
 			});
-			th.setDaemon(true);
-			th.start();
+			
+			startShooting.setDaemon(true);
+			startShooting.start();
 		}
-		x+=dx*direction;
 	}
 
-	public void stopX() {
-		isMoving = false;
-		dx = minSpeed;
+	public Queue<Bullet> getBullets() {
+		return bullets;
+	}
+
+	public void stopShoot() {
+		isShooting = false;
 	}
 }
