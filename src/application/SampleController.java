@@ -1,8 +1,6 @@
 package application;
 
 import java.io.File;
-import java.net.URL;
-
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -26,16 +24,17 @@ public class SampleController {
 		this.back = main.getBack();
 		
 		startGame();
-		playSound("test.mp3");
+		playSound("test.wav");
 	}
 	
 	private void startGame() {
 		Thread th = new Thread(() -> {
 			while(true) {
 				try {
-					Thread.sleep(1000/120);
-					drawFighter();
+					Thread.sleep(1000/100);
+					gc.clearRect(0, 0, 800, 800);
 					drawBullets();
+					drawFighter();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,14 +51,12 @@ public class SampleController {
 	}
 	
 	public void drawFighter() {
-		gc.clearRect(0, 0, 800, 800);
-		//gc.drawImage(back.getFighter().getSprite(), 0, 0);
-		gc.fillOval(back.getFighter().getX(), back.getFighter().getY(), 50, 50);
+		gc.drawImage(back.getFighter().getSprite(), back.getFighter().getX(), back.getFighter().getY());
 	}
 	
 	public void drawBullets() {
 		for (Bullet b : back.getFighter().getBullets()) {
-			gc.fillRect(b.getX(), b.getY(), 10, 30);
+			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 	}
 	
@@ -83,6 +80,7 @@ public class SampleController {
 	private static void playSound(String file){
 		Media sound = new Media(new File("files/sounds/" + file).toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setVolume(0.45);
 		mediaPlayer.play();
 	}
 }

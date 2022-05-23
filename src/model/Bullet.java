@@ -2,7 +2,7 @@ package model;
 
 import java.io.File;
 import java.util.Queue;
-
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -12,11 +12,13 @@ public class Bullet {
 	private float y;
 	private boolean exists;
 	private Queue<Bullet> parent;
+	private Image sprite;
 	
 	public Bullet(float x, float y, Queue<Bullet> parent) {
-		this.x = x;
+		this.sprite = new Image("file:files/sprites/basicBullet.png");
+		this.x = (float) (x-sprite.getWidth()/2);
 		this.y = y;
-		this.speed = 12f;
+		this.speed = 18f;
 		this.exists = true;
 		this.parent = parent;
 		startMovement();
@@ -62,4 +64,8 @@ public class Bullet {
 	public int random(int min, int max) {
         return (int) (Math.random() * (max + 1 - min)) + min;
     }
+
+	public Image getSprite() {
+		return sprite;
+	}
 }

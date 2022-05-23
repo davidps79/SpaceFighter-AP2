@@ -32,7 +32,7 @@ public class Fighter {
 		this.isShooting = false;
 		this.bullets = new LinkedList<>();
 		this.startShooting = null;
-		//this.sprite = new Image("Fighter.png");
+		this.sprite = new Image("file:files/sprites/fighter.png");
 	}
 	
 	public float getX() {
@@ -88,7 +88,6 @@ public class Fighter {
 		
 		if (!isMovingRight) {
 			isMovingRight = true;
-			
 			Thread move = new Thread(() -> {
 				while(isMovingRight) {
 					try {
@@ -124,12 +123,12 @@ public class Fighter {
 			startShooting = new Thread(() -> {
 				while (isShooting) {
 					if (canShoot) {
-						bullets.add(new Bullet(getX()+20, getY()-10, bullets));
+						bullets.add(new Bullet((float) (getX()+sprite.getWidth()/2), getY()-10, bullets));
 						canShoot = false;
 					}
 
 					try {
-						Thread.sleep(500);
+						Thread.sleep(400);
 						canShoot = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
