@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import javafx.scene.image.Image;
 
 public class Fighter {
 	private float x;
@@ -15,12 +16,14 @@ public class Fighter {
 	private boolean canShoot;
 	private boolean isShooting;
 	private Queue<Bullet> bullets;
+	private Image sprite;
+	private Thread startShooting;
 	
 	public Fighter() {
 		this.x = 400;
 		this.y = 600;
 		this.dx = 1f;
-		this.acceleration = 0.7f;
+		this.acceleration = 0.6f;
 		this.minSpeed = dx;
 		this.maxSpeed = 6f;
 		this.isMovingLeft = false;
@@ -28,6 +31,8 @@ public class Fighter {
 		this.canShoot = true;
 		this.isShooting = false;
 		this.bullets = new LinkedList<>();
+		this.startShooting = null;
+		//this.sprite = new Image("Fighter.png");
 	}
 	
 	public float getX() {
@@ -114,9 +119,9 @@ public class Fighter {
 	}
 	
 	public void shoot() {
-		if (!isShooting) {
+		if (!isShooting && canShoot) {
 			isShooting = true;	
-			Thread startShooting = new Thread(() -> {
+			startShooting = new Thread(() -> {
 				while (isShooting) {
 					if (canShoot) {
 						bullets.add(new Bullet(getX()+20, getY()-10, bullets));
@@ -143,5 +148,9 @@ public class Fighter {
 
 	public void stopShoot() {
 		isShooting = false;
+	}
+
+	public Image getSprite() {
+		return sprite;
 	}
 }

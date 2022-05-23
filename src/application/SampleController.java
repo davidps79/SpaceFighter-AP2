@@ -1,10 +1,15 @@
 package application;
 
+import java.io.File;
+import java.net.URL;
+
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.Bullet;
 import model.GameController;
 
@@ -21,6 +26,7 @@ public class SampleController {
 		this.back = main.getBack();
 		
 		startGame();
+		playSound("test.mp3");
 	}
 	
 	private void startGame() {
@@ -47,6 +53,7 @@ public class SampleController {
 	
 	public void drawFighter() {
 		gc.clearRect(0, 0, 800, 800);
+		//gc.drawImage(back.getFighter().getSprite(), 0, 0);
 		gc.fillOval(back.getFighter().getX(), back.getFighter().getY(), 50, 50);
 	}
 	
@@ -68,6 +75,14 @@ public class SampleController {
 	    if (key.getCode() == KeyCode.A || key.getCode() == KeyCode.D) 
 	    	back.getFighter().stopX();
 	    
-	    if (key.getCode() == KeyCode.SPACE) back.getFighter().stopShoot();
+	    if (key.getCode() == KeyCode.SPACE) {
+	    	back.getFighter().stopShoot();
+	    }
+	}
+	
+	private static void playSound(String file){
+		Media sound = new Media(new File("files/sounds/" + file).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
 	}
 }

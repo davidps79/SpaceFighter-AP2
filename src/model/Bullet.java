@@ -1,6 +1,10 @@
 package model;
 
+import java.io.File;
 import java.util.Queue;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Bullet {
 	private float speed;
@@ -19,6 +23,7 @@ public class Bullet {
 	}
 	
 	public void startMovement() {
+    	playSound();
 		Thread move = new Thread(() -> {
 			while(exists) {
 				try {
@@ -47,4 +52,14 @@ public class Bullet {
 	public float getY() {
 		return y;
 	}
+	
+	private void playSound(){
+		Media sound = new Media(new File("files/sounds/shoot" + random(0,2) + ".wav").toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+	}
+	
+	public int random(int min, int max) {
+        return (int) (Math.random() * (max + 1 - min)) + min;
+    }
 }
