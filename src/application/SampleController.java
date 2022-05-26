@@ -8,6 +8,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import model.BasicEnemy;
+import model.BasicEnemyBullet;
 import model.Bullet;
 import model.GameController;
 
@@ -35,6 +37,7 @@ public class SampleController {
 					gc.clearRect(0, 0, 800, 800);
 					drawBullets();
 					drawFighter();
+					drawEnemy();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,7 +54,7 @@ public class SampleController {
 	}
 	
 	public void drawFighter() {
-		//gc.drawImage(back.getFighter().getThrustSprite(), back.getFighter().getX(), back.getFighter().getY());
+		gc.drawImage(back.getFighter().getThrust().getSprite(), back.getFighter().getX()+29.5, back.getFighter().getY()+78);
 		gc.drawImage(back.getFighter().getSprite(), back.getFighter().getX(), back.getFighter().getY());
 	}
 	
@@ -59,7 +62,20 @@ public class SampleController {
 		for (Bullet b : back.getFighter().getBullets()) {
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
+		
+		for (BasicEnemy e : back.getEnemies()) {
+			for (BasicEnemyBullet b : e.getBullets()) {
+				gc.drawImage(b.getSprite(), b.getX(), b.getY());
+			}
+		}
 	}
+	
+	private void drawEnemy() {
+		for (BasicEnemy e : back.getEnemies()) {
+			gc.drawImage(e.getSprite(),e.getX(), e.getY());
+		}
+	}
+
 	
 	@FXML
 	void keyPressed(KeyEvent key) {

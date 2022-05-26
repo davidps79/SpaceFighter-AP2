@@ -154,4 +154,13 @@ public class Fighter {
 	public Image getSprite() {
 		return sprite;
 	}
+	
+	public Thrust getThrust() {
+		return thrust;
+	}
+
+	public void setThrust(Thrust thrust) {
+		this.thrust = thrust;
+	}
+
 }
