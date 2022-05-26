@@ -18,6 +18,7 @@ public class Fighter {
 	private Queue<Bullet> bullets;
 	private Image sprite;
 	private Thread startShooting;
+	private Thrust thrust;
 	
 	public Fighter() {
 		this.x = 400;
@@ -33,6 +34,7 @@ public class Fighter {
 		this.bullets = new LinkedList<>();
 		this.startShooting = null;
 		this.sprite = new Image("file:files/sprites/fighter.png");
+		this.thrust = new Thrust();
 	}
 	
 	public float getX() {
