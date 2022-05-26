@@ -17,6 +17,7 @@ public class SampleController {
 	private Main main;
 	private GameController back;
 	private GraphicsContext gc;
+	private MediaPlayer mediaPlayer;
 	
 	@FXML
 	Canvas gameCanvas;
@@ -94,9 +95,9 @@ public class SampleController {
 	    }
 	}
 	
-	private static void playSound(String file){
+	private void playSound(String file){
 		Media sound = new Media(new File("files/sounds/" + file).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setVolume(0.45);
 		mediaPlayer.play();
 	}
