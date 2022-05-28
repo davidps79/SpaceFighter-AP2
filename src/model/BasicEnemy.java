@@ -119,4 +119,111 @@ public class BasicEnemy {
 	public void setBullets(Queue<BasicEnemyBullet> bullets) {
 		this.bullets = bullets;
 	}
+	
+	
+	public void shootTime(int originY) {
+		double distance = 760-originY;
+		double speed= 18/25;
+		double time=distance/speed ;
+	}
+		
+	public void collisionEnemyL(int origenx, int origeny) {
+
+		double x_1= origenx+ dx;
+		double y_1= (origeny*-1)+(dy*-1)-43;
+
+		double x_2= origenx+ dx+16;
+		double y_2= (origeny*-1)+(dy*-1) - 43;
+
+		double m = (y_2-y_1)/(x_2-x_1);
+
+		double b = y_1 - (m*x_1);
+
+		double result;
+
+		for (int i = (int) x_2; i < x_1; i++) {
+			result = (m*i+b)*-1;
+		}
+
+	}
+
+	public void collisionEnemyR(int origenx, int origeny) {
+
+		double x_1= origenx+ dx+77;
+		double y_1= (origeny*-1)+(dy*-1)-43;
+
+		double x_2= origenx+ dx+93;
+		double y_2= (origeny*-1)+(dy*-1) - 43;
+
+		double m = (y_2-y_1)/(x_2-x_1);
+
+		double b = y_1 - (m*x_1);
+
+		double result;
+
+		for (int i = (int) x_2; i < x_1; i++) {
+			result = (m*i+b)*-1;
+		}
+
+	}
+
+	public void collisionEnemyDiagonalL(int origenx, int origeny) {
+
+		double x_1= origenx+ dx+16;
+		double y_1= (origeny*-1)+(dy*-1)-43;
+
+		double x_2= origenx+ dx+39;
+		double y_2= (origeny*-1)+(dy*-1) - 80;
+
+		double m = (y_2-y_1)/(x_2-x_1);
+
+		double b = y_1 - (m*x_1);
+
+		double result;
+
+		for (int i = (int) x_2; i < x_1; i++) {
+			result = (m*i+b)*-1;
+		}
+
+}
+
+	public void collisionEnemyDiagonalR(int origenx, int origeny) {
+
+		double x_1= origenx+ dx+54;
+		double y_1= (origeny*-1)+(dy*-1)-80;
+
+		double x_2= origenx+ dx+77;
+		double y_2= (origeny*-1)+(dy*-1) - 43;
+
+		double m = (y_2-y_1)/(x_2-x_1);
+
+		double b = y_1 - (m*x_1);
+
+		double result;
+
+		for (int i = (int) x_2; i < x_1; i++) {
+			result = (m*i+b)*-1;
+		}
+
+}
+
+	public void collisionEnemyCenter(int origenx, int origeny) {
+
+		double x_1= origenx+ dx+39;
+		double y_1= (origeny*-1)+(dy*-1)-43;
+
+		double x_2= origenx+ dx+54;
+		double y_2= (origeny*-1)+(dy*-1) - 43;
+
+		double m = (y_2-y_1)/(x_2-x_1);
+
+		double b = y_1 - (m*x_1);
+
+		double result;
+
+		for (int i = (int) x_2; i < x_1; i++) {
+			result = (m*i+b)*-1;
+		}
+
+}
 }
