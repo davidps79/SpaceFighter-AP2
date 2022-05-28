@@ -17,12 +17,12 @@ public class Fighter {
 	private boolean isShooting;
 	private Queue<Bullet> bullets;
 	private Image sprite;
+	private float xAdjust;
+	private float yAdjust;
 	private Thread startShooting;
 	private Thrust thrust;
 	
-	public Fighter() {
-		this.x = 400;
-		this.y = 600;
+	public Fighter(float x, float y) {
 		this.dx = 1f;
 		this.acceleration = 0.6f;
 		this.minSpeed = dx;
@@ -33,7 +33,11 @@ public class Fighter {
 		this.isShooting = false;
 		this.bullets = new LinkedList<>();
 		this.startShooting = null;
-		this.sprite = new Image("file:files/sprites/fighter.png");
+		this.sprite = new Image("file:files/sprites/fighter2.png");
+		this.xAdjust = (float) sprite.getWidth()/2;
+		this.yAdjust = (float) sprite.getHeight()/2;
+		this.x = x - xAdjust;
+		this.y = y - yAdjust;
 		this.thrust = new Thrust();
 	}
 	
@@ -163,4 +167,11 @@ public class Fighter {
 		this.thrust = thrust;
 	}
 
+	public double getThrustX() {
+		return x+(sprite.getWidth()/2)-(thrust.getSprite().getWidth()/2);
+	}
+
+	public double getThrustY() {
+		return y+(sprite.getHeight()/2)+(thrust.getSprite().getHeight()/2);
+	}
 }

@@ -7,7 +7,7 @@ public class GameController {
 	private ArrayList<BasicEnemy> enemies;
 	
 	public GameController() {
-		this.fighter = new Fighter();
+		this.fighter = new Fighter(400, 800);
 		this.enemies = new ArrayList<>();
 		for (int i=0; i<5; i++) {
 			enemies.add(new BasicEnemy(i*150, 0));

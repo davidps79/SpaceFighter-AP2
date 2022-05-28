@@ -1,1 +1,35 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#playButton {
+	-fx-background-image: url('file:files/ui/playButton.png');
+}
+
+#playButton:hover {
+	-fx-background-image: url('file:files/ui/playButton2.png');
+}
+
+#playButton:pressed {
+	-fx-background-image: url('file:files/ui/playButton3.png');
+}
+
+#settingsButton {
+	-fx-background-image: url('file:files/ui/settingsButton.png');
+}
+
+#settingsButton:hover {
+	-fx-background-image: url('file:files/ui/settingsButton2.png');
+}
+
+#settingsButton:pressed {
+	-fx-background-image: url('file:files/ui/settingsButton3.png');
+}
+
+#exitButton {
+	-fx-background-image: url('file:files/ui/exitButton.png');
+}
+
+#exitButton:hover {
+	-fx-background-image: url('file:files/ui/exitButton2.png');
+}
+
+#exitButton:pressed {
+	-fx-background-image: url('file:files/ui/exitButton3.png');
+}

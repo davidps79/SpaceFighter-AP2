@@ -27,7 +27,7 @@ public class SampleController {
 		this.back = main.getBack();
 		
 		startGame();
-		playSound("test.mp3");
+		//playSound("test.mp3");
 	}
 	
 	private void startGame() {
@@ -35,7 +35,7 @@ public class SampleController {
 			while(true) {
 				try {
 					Thread.sleep(1000/100);
-					gc.clearRect(0, 0, 800, 800);
+					gc.clearRect(0, 0, 1200, 900);
 					drawBullets();
 					drawFighter();
 					drawEnemy();
@@ -55,7 +55,7 @@ public class SampleController {
 	}
 	
 	public void drawFighter() {
-		gc.drawImage(back.getFighter().getThrust().getSprite(), back.getFighter().getX()+29.5, back.getFighter().getY()+78);
+		gc.drawImage(back.getFighter().getThrust().getSprite(), back.getFighter().getThrustX(), back.getFighter().getThrustY());
 		gc.drawImage(back.getFighter().getSprite(), back.getFighter().getX(), back.getFighter().getY());
 	}
 	

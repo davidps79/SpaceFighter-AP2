@@ -31,7 +31,7 @@ public class BasicEnemy {
 				//System.out.print("Derecha: ");
 				for (int i = 0; i < 10; i++) {
 					try {
-						TimeUnit.SECONDS.sleep(1);
+						TimeUnit.SECONDS.sleep(3);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -42,7 +42,7 @@ public class BasicEnemy {
 				}
 				//System.out.print("\n");
 				try {
-					TimeUnit.SECONDS.sleep(1);
+					TimeUnit.SECONDS.sleep(3);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class BasicEnemy {
 				//System.out.print("Izquierda: ");
 				for (int i = 0; i < 10; i++) {
 					try {
-						TimeUnit.SECONDS.sleep(1);
+						TimeUnit.SECONDS.sleep(3);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
