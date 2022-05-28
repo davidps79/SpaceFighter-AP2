@@ -174,4 +174,46 @@ public class Fighter {
 	public double getThrustY() {
 		return y+(sprite.getHeight()/2)+(thrust.getSprite().getHeight()/2);
 	}
+	
+	public void collisionR(int origenx, int origeny) {
+		
+		double x_1= origenx+ dx + (77/2);
+		double y_1= (origeny*-1)+(dy*-1);
+		
+		double x_2= origenx+ dx + 77;
+		double y_2= (origeny*-1)+(dy*-1) - 67;
+		
+		double m = (y_2-y_1)/(x_2-x_1);
+		
+		double b = y_1 - (m*x_1);
+		
+		double result;
+		
+		for (int i = (int) x_1; i < x_2; i++) {
+			
+			result = (m*i+b)*-1;
+			
+		}
+		
+	}
+	
+	public void collisionL(int origenx, int origeny) {
+
+		double x_1= origenx+ dx + (77/2);
+		double y_1= (origeny*-1)+(dy*-1);
+
+		double x_2= origenx+ dx;
+		double y_2= (origeny*-1)+(dy*-1) - 67;
+
+		double m = (y_2-y_1)/(x_2-x_1);
+
+		double b = y_1 - (m*x_1);
+
+		double result;
+
+		for (int i = (int) x_2; i < x_1; i++) {
+			result = (m*i+b)*-1;
+		}
+		
+	}
 }
