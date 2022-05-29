@@ -178,10 +178,10 @@ public class Fighter {
 	public void collisionR(int origenx, int origeny) {
 		
 		double x_1= origenx+ dx + (77/2);
-		double y_1= (origeny*-1)+(dy*-1);
+		double y_1= (origeny*-1);
 		
 		double x_2= origenx+ dx + 77;
-		double y_2= (origeny*-1)+(dy*-1) - 67;
+		double y_2= (origeny*-1) - 67;
 		
 		double m = (y_2-y_1)/(x_2-x_1);
 		
@@ -200,10 +200,10 @@ public class Fighter {
 	public void collisionL(int origenx, int origeny) {
 
 		double x_1= origenx+ dx + (77/2);
-		double y_1= (origeny*-1)+(dy*-1);
+		double y_1= (origeny*-1);
 
 		double x_2= origenx+ dx;
-		double y_2= (origeny*-1)+(dy*-1) - 67;
+		double y_2= (origeny*-1) - 67;
 
 		double m = (y_2-y_1)/(x_2-x_1);
 

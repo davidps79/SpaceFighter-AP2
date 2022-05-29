@@ -17,7 +17,7 @@
                   <Image url="@../../files/ui/spaceBackground.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="900.0" fitWidth="1200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="stars" fitHeight="900.0" fitWidth="1200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../files/ui/startsBackground.png" />
                </image>
