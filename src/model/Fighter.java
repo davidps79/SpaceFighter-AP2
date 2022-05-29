@@ -216,4 +216,16 @@ public class Fighter {
 		}
 		
 	}
+	
+	public void collisionsFighter(int origenx, int origeny, int x, int y) {
+				
+		int x_1=origenx;
+		int x_2=origenx+77;
+		int y_1=origeny;
+
+		if(x>=x_1 && x<=x_2 && y>=y_1) {
+
+		}
+
+	}
 }
