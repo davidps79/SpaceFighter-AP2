@@ -6,10 +6,12 @@ public class GameController {
 	private Fighter fighter;
 	private ArrayList<BasicEnemy> enemies;
 	private ArrayList<BasicEnemyBullet> enemyBullets;
+	private ArrayList<Bullet> bullets;
 	
 	public GameController() {
 		this.enemyBullets = new ArrayList<>();
-		this.fighter = new Fighter(400, 800);
+		this.bullets= new ArrayList<>();
+		this.fighter = new Fighter(400, 800, this);
 		this.enemies = new ArrayList<>();
 		for (int i=0; i<5; i++) {
 			enemies.add(new BasicEnemy(i*150, 0, this));
@@ -34,5 +36,10 @@ public class GameController {
 
 	public ArrayList<BasicEnemyBullet> getEnemyBullets() {
 		return enemyBullets;
+	}
+
+	public ArrayList<Bullet> getBullets() {
+		
+		return bullets;
 	}
 }

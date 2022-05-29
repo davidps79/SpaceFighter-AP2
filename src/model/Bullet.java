@@ -13,12 +13,14 @@ public class Bullet {
 	private boolean exists;
 	private ArrayList<Bullet> parent;
 	private Image sprite;
+	private GameController controller;
 	
-	public Bullet(float x, float y, ArrayList<Bullet> parent) {
+	public Bullet(float x, float y, ArrayList<Bullet> parent, GameController controller) {
 		this.sprite = new Image("file:files/sprites/basicBullet.png");
 		this.x = (float) (x-sprite.getWidth()/2);
 		this.y = y;
 		this.speed = 18f;
+		this.controller=controller;
 		this.exists = true;
 		this.parent = parent;
 		startMovement();
@@ -36,6 +38,7 @@ public class Bullet {
 						exists = false;
 						parent.remove(this);
 					}
+					collisionsComplete();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -67,5 +70,89 @@ public class Bullet {
 
 	public Image getSprite() {
 		return sprite;
+	}
+	
+
+	public void collisionsL(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx;
+		int x_2=origenx+16;
+		int y_1=origeny+43;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsR(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+77;
+		int x_2=origenx+93;
+		int y_1=origeny+43;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsDL(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+16;
+		int x_2=origenx+39;
+		int y_1=origeny+80;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsDR(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+54;
+		int x_2=origenx+77;
+		int y_1=origeny+80;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsCenter(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+39;
+		int x_2=origenx+54;
+		int y_1=origeny+43;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+	public void collisionsComplete() {
+
+		for (BasicEnemy i: controller.getEnemies()) {
+			int x_1=i.getX();
+			int x_2=i.getX()+93;
+			int y_1=i.getY();
+			int y_2=i.getY()+75;
+
+			if(x>=x_1 && x<=x_2 && y<=y_2 && y>=y_1) {
+				parent.remove(this);
+				exists= false;
+				controller.getFighter().setScore(1);
+				i.destroy();
+				controller.getEnemies().remove(i);
+				break;
+			}
+			
+		}
+		
+		
+		
+
 	}
 }

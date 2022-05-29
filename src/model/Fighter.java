@@ -21,18 +21,21 @@ public class Fighter {
 	private Thread startShooting;
 	private Thrust thrust;
 	private int lifes;
+	private int score;
+	private GameController controller;
 	
-	public Fighter(float x, float y) {
+	public Fighter(float x, float y, GameController controller) {
 		this.lifes = 3;
 		this.dx = 1f;
 		this.acceleration = 0.6f;
+		this.controller= controller;
 		this.minSpeed = dx;
 		this.maxSpeed = 6f;
 		this.isMovingLeft = false;
 		this.isMovingRight = false;
 		this.canShoot = true;
 		this.isShooting = false;
-		this.bullets = new ArrayList<>();
+		this.bullets = controller.getBullets();
 		this.startShooting = null;
 		this.sprite = new Image("file:files/sprites/fighter2.png");
 		this.xAdjust = (float) sprite.getWidth()/2;
@@ -66,6 +69,15 @@ public class Fighter {
 	public void setDx(float dx) {
 		this.dx = dx;
 	}
+	
+	public int getScore() {
+		return this.score;
+	}
+	
+	public void setScore(int score) {
+		this.score+=score;
+	}
+	
 
 	public float getAcceleration() {
 		return acceleration;
@@ -139,7 +151,7 @@ public class Fighter {
 			startShooting = new Thread(() -> {
 				while (isShooting) {
 					if (canShoot) {
-						bullets.add(new Bullet((float) (getX()+sprite.getWidth()/2), getY()-10, bullets));
+						bullets.add(new Bullet((float) (getX()+sprite.getWidth()/2), getY()-10, bullets,controller));
 						canShoot = false;
 					}
 
