@@ -64,10 +64,8 @@ public class SampleController {
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 		
-		for (BasicEnemy e : back.getEnemies()) {
-			for (BasicEnemyBullet b : e.getBullets()) {
-				gc.drawImage(b.getSprite(), b.getX(), b.getY());
-			}
+		for (BasicEnemyBullet b : back.getEnemyBullets()) {
+			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 	}
 	

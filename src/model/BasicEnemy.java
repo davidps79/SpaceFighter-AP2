@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
@@ -11,16 +12,18 @@ public class BasicEnemy {
 	private int y;
 	private int dx; 
 	private int dy;
+	private ArrayList<BasicEnemyBullet> bullets;
+	private GameController controller;
 	private Image sprite;
-	private Queue<BasicEnemyBullet> bullets;
 	
-	public BasicEnemy(int x, int y) {
+	public BasicEnemy(int x, int y, GameController controller) {
 		this.x = x;
 		this.y = y;
 		this.sprite = new Image("file:files/sprites/enemy_1.png");
 		this.dx=80;
 		this.dy=80;
-		this.bullets = new LinkedList<>();
+		this.controller = controller;
+		this.bullets = controller.getEnemyBullets();
 		start();
 	}
 	
@@ -74,7 +77,7 @@ public class BasicEnemy {
 	}
 	
 	public int random() {
-		return (int) (Math.random() * (8 + 1 - 1)) + 1;
+		return (int) (Math.random() * (4 + 1 - 1)) + 1;
 	}
 	
 	public void shoot() {
@@ -85,7 +88,7 @@ public class BasicEnemy {
 	}
 	
 	public void startShoot() {
-		bullets.offer(new BasicEnemyBullet((float) (getX()+sprite.getWidth()/2), getY()-10, bullets));
+		bullets.add(new BasicEnemyBullet((float) (getX()+sprite.getWidth()/2), getY()-10, controller));
 	}
 
 	public int getX() {
@@ -111,15 +114,6 @@ public class BasicEnemy {
 	public void setSprite(Image sprite) {
 		this.sprite = sprite;
 	}
-	
-	public Queue<BasicEnemyBullet> getBullets() {
-		return bullets;
-	}
-
-	public void setBullets(Queue<BasicEnemyBullet> bullets) {
-		this.bullets = bullets;
-	}
-	
 	
 	public void shootTime(int originY) {
 		double distance = 760-originY;

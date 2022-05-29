@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Queue;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
@@ -11,16 +12,18 @@ public class BasicEnemyBullet {
 	private float x;
 	private float y;
 	private boolean exists;
-	private Queue<BasicEnemyBullet> parent;
+	private ArrayList<BasicEnemyBullet> parent;
+	private GameController controller;
 	private Image sprite;
 	
-	public BasicEnemyBullet(float x, float y, Queue<BasicEnemyBullet> parent) {
+	public BasicEnemyBullet(float x, float y, GameController controller) {
 		this.sprite = new Image("file:files/sprites/enemy_laser.png");
 		this.x = (float) (x-sprite.getWidth()/2);
 		this.y = y;
 		this.speed = 18f;
 		this.exists = true;
-		this.parent = parent;
+		this.controller = controller;
+		this.parent = controller.getEnemyBullets();
 		startMovement();
 	}
 	
@@ -32,10 +35,13 @@ public class BasicEnemyBullet {
 					Thread.sleep(25);
 					y+=speed;
 					
-					if (y<-30) {
-						exists = false;
-						parent.poll();
+					if (y<0) {
+						if (exists) {
+							exists = false;
+							parent.remove(this);
+						}
 					}
+					collisionsFighter();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -67,5 +73,17 @@ public class BasicEnemyBullet {
 
 	public Image getSprite() {
 		return sprite;
+	}
+	
+	public void collisionsFighter() {
+		float x_1 = controller.getFighter().getX();
+		float x_2 = controller.getFighter().getX()+78;
+		float y_1 = controller.getFighter().getY();
+
+		if(x>=x_1 && x<=x_2 && y>=y_1 && y<=y_1+80) {
+			parent.remove(this);
+			controller.getFighter().lostLife();
+			exists = false;
+		}
 	}
 }

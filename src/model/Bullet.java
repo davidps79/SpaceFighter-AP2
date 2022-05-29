@@ -1,7 +1,7 @@
 package model;
 
 import java.io.File;
-import java.util.Queue;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -11,10 +11,10 @@ public class Bullet {
 	private float x;
 	private float y;
 	private boolean exists;
-	private Queue<Bullet> parent;
+	private ArrayList<Bullet> parent;
 	private Image sprite;
 	
-	public Bullet(float x, float y, Queue<Bullet> parent) {
+	public Bullet(float x, float y, ArrayList<Bullet> parent) {
 		this.sprite = new Image("file:files/sprites/basicBullet.png");
 		this.x = (float) (x-sprite.getWidth()/2);
 		this.y = y;
@@ -34,7 +34,7 @@ public class Bullet {
 					
 					if (y<-30) {
 						exists = false;
-						parent.poll();
+						parent.remove(this);
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();

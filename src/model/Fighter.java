@@ -1,7 +1,6 @@
 package model;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Fighter {
@@ -15,14 +14,16 @@ public class Fighter {
 	private boolean isMovingRight;
 	private boolean canShoot;
 	private boolean isShooting;
-	private Queue<Bullet> bullets;
+	private ArrayList<Bullet> bullets;
 	private Image sprite;
 	private float xAdjust;
 	private float yAdjust;
 	private Thread startShooting;
 	private Thrust thrust;
+	private int lifes;
 	
 	public Fighter(float x, float y) {
+		this.lifes = 3;
 		this.dx = 1f;
 		this.acceleration = 0.6f;
 		this.minSpeed = dx;
@@ -31,7 +32,7 @@ public class Fighter {
 		this.isMovingRight = false;
 		this.canShoot = true;
 		this.isShooting = false;
-		this.bullets = new LinkedList<>();
+		this.bullets = new ArrayList<>();
 		this.startShooting = null;
 		this.sprite = new Image("file:files/sprites/fighter2.png");
 		this.xAdjust = (float) sprite.getWidth()/2;
@@ -39,6 +40,15 @@ public class Fighter {
 		this.x = x - xAdjust;
 		this.y = y - yAdjust;
 		this.thrust = new Thrust();
+	}
+	
+	public int getLifes() {
+		return lifes;
+	}
+
+	public void lostLife() {
+		if (lifes>1) this.lifes--;
+		else System.out.println("GAME OVER");
 	}
 	
 	public float getX() {
@@ -147,7 +157,7 @@ public class Fighter {
 		}
 	}
 
-	public Queue<Bullet> getBullets() {
+	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
 
@@ -173,59 +183,5 @@ public class Fighter {
 
 	public double getThrustY() {
 		return y+(sprite.getHeight()/2)+(thrust.getSprite().getHeight()/2);
-	}
-	
-	public void collisionR(int origenx, int origeny) {
-		
-		double x_1= origenx+ dx + (77/2);
-		double y_1= (origeny*-1);
-		
-		double x_2= origenx+ dx + 77;
-		double y_2= (origeny*-1) - 67;
-		
-		double m = (y_2-y_1)/(x_2-x_1);
-		
-		double b = y_1 - (m*x_1);
-		
-		double result;
-		
-		for (int i = (int) x_1; i < x_2; i++) {
-			
-			result = (m*i+b)*-1;
-			
-		}
-		
-	}
-	
-	public void collisionL(int origenx, int origeny) {
-
-		double x_1= origenx+ dx + (77/2);
-		double y_1= (origeny*-1);
-
-		double x_2= origenx+ dx;
-		double y_2= (origeny*-1) - 67;
-
-		double m = (y_2-y_1)/(x_2-x_1);
-
-		double b = y_1 - (m*x_1);
-
-		double result;
-
-		for (int i = (int) x_2; i < x_1; i++) {
-			result = (m*i+b)*-1;
-		}
-		
-	}
-	
-	public void collisionsFighter(int origenx, int origeny, int x, int y) {
-				
-		int x_1=origenx;
-		int x_2=origenx+77;
-		int y_1=origeny;
-
-		if(x>=x_1 && x<=x_2 && y>=y_1) {
-
-		}
-
 	}
 }
