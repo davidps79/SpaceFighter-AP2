@@ -60,7 +60,7 @@ public class SampleController {
 	}
 	
 	public void drawBullets() {
-		for (Bullet b : back.getFighter().getBullets()) {
+		for (Bullet b : back.getBullets()) {
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 		

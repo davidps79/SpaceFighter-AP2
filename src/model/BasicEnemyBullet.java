@@ -84,6 +84,7 @@ public class BasicEnemyBullet {
 			parent.remove(this);
 			controller.getFighter().lostLife();
 			exists = false;
+			
 		}
 	}
 }
