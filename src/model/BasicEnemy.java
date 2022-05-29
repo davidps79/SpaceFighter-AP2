@@ -225,5 +225,66 @@ public class BasicEnemy {
 			result = (m*i+b)*-1;
 		}
 
-}
+	}
+	
+	
+	public void collisionsL(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx;
+		int x_2=origenx+16;
+		int y_1=origeny+43;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsR(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+77;
+		int x_2=origenx+93;
+		int y_1=origeny+43;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsDL(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+16;
+		int x_2=origenx+39;
+		int y_1=origeny+80;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsDR(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+54;
+		int x_2=origenx+77;
+		int y_1=origeny+80;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
+
+	public void collisionsCenter(int origenx, int origeny, int x, int y) {
+
+		int x_1=origenx+39;
+		int x_2=origenx+54;
+		int y_1=origeny+43;
+
+		if(x>=x_1 && x<=x_2 && y<=y_1) {
+
+		}
+
+	}
 }
