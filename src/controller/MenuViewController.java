@@ -17,7 +17,6 @@ import javafx.util.Duration;
 
 public class MenuViewController {
 	private Main main;
-	private MediaPlayer mediaPlayer;
 
 	@FXML
 	private Button playButton;
@@ -27,6 +26,13 @@ public class MenuViewController {
 	private Button exitButton;
 	@FXML
 	private ImageView stars;
+	
+	@FXML
+	void initialize() {
+		playButton.setOpacity(0);
+		settingsButton.setOpacity(0);
+		exitButton.setOpacity(0);
+	}
 	
     @FXML
     void exit() {
@@ -64,18 +70,35 @@ public class MenuViewController {
     
 	public void setMain(Main main) {
 		this.main = main;
-		playBackgroundMusic("MenuMusic.wav");
-		startStars();
+		startButtons();
 	}
 	
-	private void playBackgroundMusic(String file){
-		Media sound = new Media(new File("files/sounds/" + file).toURI().toString());
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setVolume(0.8f);
-		mediaPlayer.setVolume(0.45);
-		mediaPlayer.play();
+	private void startButtons() {
+		Thread timer = new Thread(()->{
+			try {
+				fadeButton(playButton);
+				Thread.sleep(400);
+				fadeButton(settingsButton);
+				Thread.sleep(400);
+				fadeButton(exitButton);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+		timer.setDaemon(true);
+		timer.start();
 	}
 	
+	private void fadeButton(Button button) {
+		FadeTransition fade = new FadeTransition();
+		fade.setNode(button);
+		fade.setDuration(Duration.millis(600));
+		fade.setFromValue(0);
+		fade.setToValue(1);
+		fade.play();
+		playSound("Button4.wav", 0.8f);
+	}
+
 	private void startStars() {
 		Thread animation = new Thread(()->{
 			int waitTime = 5000;
@@ -121,6 +144,5 @@ public class MenuViewController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 	}
 }
