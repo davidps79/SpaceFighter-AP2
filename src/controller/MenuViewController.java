@@ -2,7 +2,6 @@ package controller;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-
 import application.Main;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -11,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class MenuViewController {
@@ -21,7 +18,7 @@ public class MenuViewController {
 	@FXML
 	private Button playButton;
 	@FXML
-	private Button settingsButton;
+	private Button topButton;
 	@FXML
 	private Button exitButton;
 	@FXML
@@ -30,7 +27,7 @@ public class MenuViewController {
 	@FXML
 	void initialize() {
 		playButton.setOpacity(0);
-		settingsButton.setOpacity(0);
+		topButton.setOpacity(0);
 		exitButton.setOpacity(0);
 	}
 	
@@ -55,8 +52,8 @@ public class MenuViewController {
     }
 
     @FXML
-    void settings() {
-    	clickSound();
+    void seeTopFive() {
+    	main.openTopFive();
     }
 
     @FXML
@@ -78,7 +75,7 @@ public class MenuViewController {
 			try {
 				fadeButton(playButton);
 				Thread.sleep(400);
-				fadeButton(settingsButton);
+				fadeButton(topButton);
 				Thread.sleep(400);
 				fadeButton(exitButton);
 			} catch (InterruptedException e) {

@@ -10,17 +10,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Registry {
-	
 	private ArrayList<Player> players;
 	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+	
 	@SuppressWarnings("unchecked")
-	public Registry(String name, int score) {
-		add(name, score);
+	public Registry() {
 		File file = new File(".\\files\\dataScore.obj");
 		if(!file.exists()) {
 			players = new ArrayList<Player>();
 			saveScore();
-		 }else {
+		 } else {
 			try {
 				FileInputStream fis = new FileInputStream(file);
 				ObjectInputStream ois = new ObjectInputStream(fis); 

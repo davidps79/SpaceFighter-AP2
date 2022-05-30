@@ -15,8 +15,12 @@ public class GameController {
 	private int enemyAmount;
 	private int enemyCounter;
 	private int score;
+	private int shootLevel;
+	private int movementLevel;
 	
 	public GameController() {
+		this.shootLevel = 4;
+		this.movementLevel = 3000;
 		this.enemyAmount = 12;
 		this.enemyCounter = enemyAmount;
 		this.life = 3;
@@ -34,12 +38,12 @@ public class GameController {
 		
 		for (int i=0; i<rows; i++) {
 			for (int j=0; j<8; j++) {
-				enemies.add(new BasicEnemy(150*j+20, 50+i*150, this));
+				enemies.add(new BasicEnemy(150*j+20, 50+i*150, this, shootLevel, movementLevel));
 			}
 		}
 		
 		for (int i=0; i<extra; i++) {
-			enemies.add(new BasicEnemy(150*i+20, 50+rows*150, this));
+			enemies.add(new BasicEnemy(150*i+20, 50+rows*150, this, shootLevel, movementLevel));
 		}
 	}
 

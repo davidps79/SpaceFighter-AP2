@@ -10,16 +10,16 @@
 	-fx-background-image: url('file:files/ui/playButton3.png');
 }
 
-#settingsButton {
-	-fx-background-image: url('file:files/ui/settingsButton.png');
+#topButton {
+	-fx-background-image: url('file:files/ui/topButton.png');
 }
 
-#settingsButton:hover {
-	-fx-background-image: url('file:files/ui/settingsButton2.png');
+#topButton:hover {
+	-fx-background-image: url('file:files/ui/topButton2.png');
 }
 
-#settingsButton:pressed {
-	-fx-background-image: url('file:files/ui/settingsButton3.png');
+#topButton:pressed {
+	-fx-background-image: url('file:files/ui/topButton3.png');
 }
 
 #exitButton {
@@ -40,4 +40,16 @@
 
 .text-area .content {
     -fx-background-color: transparent;
+}
+
+#returnButton {
+	-fx-background-image: url('file:files/ui/xButton.png');
+}
+
+#returnButton:hover {
+	-fx-background-image: url('file:files/ui/xButton2.png');
+}
+
+#returnButton:pressed {
+	-fx-background-image: url('file:files/ui/xButton3.png');
 }

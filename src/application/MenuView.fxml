@@ -19,7 +19,7 @@
             <VBox alignment="CENTER" layoutX="421.0" layoutY="397.0" prefHeight="347.0" prefWidth="359.0" spacing="17.0">
                <children>
                   <Button id="playButton" fx:id="playButton" mnemonicParsing="false" onAction="#play" onMouseEntered="#hoverSound" prefHeight="77.0" prefWidth="203.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
-                  <Button id="settingsButton" fx:id="settingsButton" mnemonicParsing="false" onAction="#settings" onMouseEntered="#hoverSound" prefHeight="77.0" prefWidth="203.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+                  <Button id="topButton" fx:id="topButton" mnemonicParsing="false" onAction="#seeTopFive" onMouseEntered="#hoverSound" prefHeight="77.0" prefWidth="203.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
                   <Button id="exitButton" fx:id="exitButton" mnemonicParsing="false" onAction="#exit" onMouseEntered="#hoverSound" prefHeight="77.0" prefWidth="203.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
                </children>
             </VBox>

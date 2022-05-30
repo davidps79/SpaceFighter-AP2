@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import model.GameController;
+import model.Registry;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -16,10 +17,16 @@ public class Main extends Application {
 	private GameController back;
 	private MediaPlayer mediaPlayer;
 	private Stage currentStage;
+	private Registry registry;
 	
 	@Override
-	public void start(Stage primaryStage) {			
-		try {
+	public void start(Stage primaryStage) {	
+		this.registry = new Registry();
+		currentStage = primaryStage;
+		primaryStage.show();
+		openMenu();
+		
+		/*try {
 			playBackgroundMusic("MenuMusic.wav");
 			currentStage = primaryStage;
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("StartupView.fxml"));
@@ -32,7 +39,7 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public void openGame() {
@@ -83,5 +90,23 @@ public class Main extends Application {
 		mediaPlayer.setVolume(0.8f);
 		mediaPlayer.setVolume(0.45);
 		mediaPlayer.play();
+	}
+
+	public Registry getRegistry() {
+		return registry;
+	}
+
+	public void openTopFive() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("TopFiveView.fxml"));
+			BorderPane root = (BorderPane) loader.load();
+			TopFiveController controller = loader.getController();
+			controller.setMain(this);
+			Scene scene = new Scene(root, 1200, 900);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			currentStage.setScene(scene);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
