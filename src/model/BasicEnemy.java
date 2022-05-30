@@ -16,8 +16,10 @@ public class BasicEnemy {
 	private GameController controller;
 	private Image sprite;
 	private boolean exists;
+	private int prob;
+	private int speed;
 	
-	public BasicEnemy(int x, int y, GameController controller) {
+	public BasicEnemy(int x, int y, GameController controller, int prob, int speed) {
 		this.x = x;
 		this.y = y;
 		this.sprite = new Image("file:files/sprites/enemy_1.png");
@@ -26,6 +28,8 @@ public class BasicEnemy {
 		this.exists=true;
 		this.controller = controller;
 		this.bullets = controller.getEnemyBullets();
+		this.prob=prob;
+		this.speed=speed;
 		start();
 	}
 	
@@ -37,7 +41,7 @@ public class BasicEnemy {
 				int movement= (1200-x)/80;
 				for (int i = 0; i < movement-1 && exists; i++) {
 					try {
-						TimeUnit.SECONDS.sleep(3);
+						TimeUnit.SECONDS.sleep(speed);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -48,7 +52,7 @@ public class BasicEnemy {
 				}
 				//System.out.print("\n");
 				try {
-					TimeUnit.SECONDS.sleep(3);
+					TimeUnit.SECONDS.sleep(speed);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -60,7 +64,7 @@ public class BasicEnemy {
 				int movement2= (int) ((1200-sprite.getWidth())/80);
 				for (int i = 0; i < movement2 && exists; i++) {
 					try {
-						TimeUnit.SECONDS.sleep(3);
+						TimeUnit.SECONDS.sleep(speed);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -81,7 +85,7 @@ public class BasicEnemy {
 	}
 	
 	public int random() {
-		return (int) (Math.random() * (4 + 1 - 1)) + 1;
+		return (int) (Math.random() * (prob + 1 - 1)) + 1;
 	}
 	
 	public int random1() {
@@ -91,7 +95,7 @@ public class BasicEnemy {
 	public void shoot() {
 		if(exists) {
 			int shoot=random();
-			if (shoot==3) {
+			if (shoot==1) {
 				Thread timer = new Thread(() -> {
 					try {
 						TimeUnit.MILLISECONDS.sleep(random1());
