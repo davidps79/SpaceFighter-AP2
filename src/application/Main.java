@@ -45,7 +45,7 @@ public class Main extends Application {
 		try {
 			back = new GameController(this);
 			mediaPlayer.stop(); 
-			playBackgroundMusic("BattleMusic.mp3", 0.5f);
+			playBackgroundMusic("BattleMusic.mp3", 0.3f);
 			
 			Runnable onEnd = new Runnable() {
 	            @Override
@@ -53,6 +53,7 @@ public class Main extends Application {
 	            	Media sound = new Media(new File("files/sounds/" + "BattleMusic.mp3").toURI().toString());
 	            	mediaPlayer.dispose();
 	            	mediaPlayer = new MediaPlayer(sound);
+	            	mediaPlayer.setVolume(0.3f);
 	            	mediaPlayer.play();
 	            	mediaPlayer.setOnEndOfMedia(this);
 	            }
@@ -126,7 +127,7 @@ public class Main extends Application {
 		back.getFighter().stop();
 		back = null;
 		mediaPlayer.stop();
-		playBackgroundMusic("BattleMusic.mp3", 0.5f);
+		playBackgroundMusic("MenuMusic.wav", 1f);
 		openMenu();
 	}
 }
