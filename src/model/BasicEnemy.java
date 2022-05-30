@@ -48,6 +48,7 @@ public class BasicEnemy {
 					}
 					x+=dx;
 					shoot();
+					collisionsEnemy();
 					//System.out.print(x+ " ");
 				}
 				//System.out.print("\n");
@@ -59,6 +60,7 @@ public class BasicEnemy {
 				}
 				y+=dy;
 				shoot();
+				collisionsEnemy();
 				//System.out.println("Abajo: "+ y);
 				//System.out.print("Izquierda: ");
 				int movement2= (int) ((1200-sprite.getWidth())/80);
@@ -71,11 +73,13 @@ public class BasicEnemy {
 					}
 					x-=dx;
 					shoot();
+					collisionsEnemy();
 					//System.out.print(x+ " ");
 				}
 				//System.out.print("\n");
 				y+=dy;
 				shoot();
+				collisionsEnemy();
 				//System.out.println("Abajo: "+ y);
 			}
         });
@@ -150,6 +154,24 @@ public class BasicEnemy {
 	public void destroy() {
 		this.exists=false;
 	}
+	
+	public void collisionsEnemy() {
+		
+			Fighter ft= controller.getFighter();
+			float x_1=ft.getX();
+			float x_2=ft.getX()+77;
+			float y_1=ft.getY();
+			float y_2=ft.getY()+80;
+
+			if((x+93)>=x_1 && (x+93)<=x_2 && y+80<=y_2 && y+80>=y_1) {
+				controller.setLife(0);
+				System.out.println("Moriste");
+			}else if((x)>=x_1 && (x)<=x_2 && y+80<=y_2 && y+80>=y_1) {
+				controller.setLife(0);
+				System.out.println("Moriste");
+			}
+			
+		}	
 		
 	
 }
