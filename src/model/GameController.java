@@ -87,6 +87,7 @@ public class GameController {
 	}
 	
 	private void nextLevel() {
+		gameViewController.updateStats();
 		playSound("respawn.wav", 1);
 		level++;
 		movementLevel -= 100;
