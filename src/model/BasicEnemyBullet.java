@@ -41,7 +41,7 @@ public class BasicEnemyBullet {
 							parent.remove(this);
 						}
 					}
-					collisionsFighter();
+					if (exists) collisionsFighter();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -76,14 +76,20 @@ public class BasicEnemyBullet {
 	}
 	
 	public void collisionsFighter() {
-		float x_1 = controller.getFighter().getX();
-		float x_2 = controller.getFighter().getX()+78;
-		float y_1 = controller.getFighter().getY();
+		if (exists) {
+			float x_1 = controller.getFighter().getX();
+			float x_2 = controller.getFighter().getX()+78;
+			float y_1 = controller.getFighter().getY();
 
-		if(x>=x_1 && x<=x_2 && y>=y_1 && y<=y_1+80) {
-			parent.remove(this);
-			controller.lostLife();
-			exists = false;
+			if(x>=x_1 && x<=x_2 && y>=y_1 && y<=y_1+80) {
+				parent.remove(this);
+				controller.lostLife();
+				exists = false;
+			}
 		}
+	}
+
+	public void setExists(boolean b) {
+		this.exists = b;
 	}
 }

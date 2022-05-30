@@ -53,6 +53,7 @@ public class MenuViewController {
 
     @FXML
     void seeTopFive() {
+    	clickSound();
     	main.openTopFive();
     }
 
@@ -94,43 +95,6 @@ public class MenuViewController {
 		fade.setToValue(1);
 		fade.play();
 		playSound("Button4.wav", 0.8f);
-	}
-
-	private void startStars() {
-		Thread animation = new Thread(()->{
-			int waitTime = 5000;
-			boolean flag = true;
-			while (flag) {
-				FadeTransition fade = new FadeTransition();
-				fade.setDuration(Duration.millis(waitTime));
-				fade.setNode(stars);
-				fade.setFromValue(1);
-				fade.setToValue(0.3);
-				fade.play();
-				
-				try {
-					
-					Thread.sleep(waitTime);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				FadeTransition fade2 = new FadeTransition();
-				fade2.setDuration(Duration.millis(waitTime));
-				fade2.setNode(stars);
-				fade2.setFromValue(0.2);
-				fade2.setToValue(1);
-				fade2.play();
-				
-				try {
-					Thread.sleep(waitTime);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		animation.setDaemon(true);
-		animation.start();
 	}
 	
 	private void playSound(String file, float volume) {

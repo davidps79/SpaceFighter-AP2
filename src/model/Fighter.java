@@ -145,7 +145,7 @@ public class Fighter {
 					}
 
 					try {
-						Thread.sleep(400);
+						Thread.sleep(800);
 						canShoot = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -184,5 +184,12 @@ public class Fighter {
 
 	public double getThrustY() {
 		return y+(sprite.getHeight()/2)+(thrust.getSprite().getHeight()/2);
+	}
+	
+	public void stop() {
+		this.isMovingLeft = false;
+		this.isMovingRight = false;
+		this.canShoot = true;
+		this.isShooting = false;
 	}
 }

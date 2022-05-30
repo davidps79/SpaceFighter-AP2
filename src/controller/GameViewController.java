@@ -2,13 +2,14 @@ package controller;
 
 import java.io.File;
 import java.util.Iterator;
-
+import java.util.Optional;
 import application.Main;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,7 +28,6 @@ public class GameViewController {
 	private Main main;
 	private GameController back;
 	private GraphicsContext gc;
-	private MediaPlayer mediaPlayer;
 	
 	@FXML
 	Canvas gameCanvas;
@@ -38,13 +38,19 @@ public class GameViewController {
 	@FXML
 	Label scoreLabel;
 	
+	@FXML
+	Label levelLabel;
+	
     @FXML
     private MediaView spaceStars;
+    
+    private boolean gameOn = true;
     
 	public void setMain(Main main) {
 		this.main = main;
 		this.back = main.getBack();
 		scoreLabel.setText("0 puntos");
+		levelLabel.setText("Nivel 1");
 		startGame();
 		spaceStars.setMediaPlayer(new MediaPlayer(new Media(new File("files/sprites/spaceStars.mp4").toURI().toString())));
 		spaceStars.getMediaPlayer().setOnEndOfMedia(new Runnable() {
@@ -55,12 +61,11 @@ public class GameViewController {
 	        }
 	    }); 
 		spaceStars.getMediaPlayer().play();
-		//playSound("test.mp3");
 	}
 	
 	private void startGame() {
 		Thread th = new Thread(() -> {
-			while(true) {
+			while(gameOn) {
 				try {
 					Thread.sleep(1000/100);
 					gc.clearRect(0, 0, 1200, 900);
@@ -79,6 +84,7 @@ public class GameViewController {
 	@FXML
 	public void initialize() {
 		scoreLabel.setFont(Font.loadFont("file:files/ui/GamePlayed.otf", 18));
+		levelLabel.setFont(Font.loadFont("file:files/ui/GamePlayed.otf", 18));
 		gameCanvas.setFocusTraversable(true);
 		gc = gameCanvas.getGraphicsContext2D();
 	}
@@ -90,13 +96,13 @@ public class GameViewController {
 	
 	public void drawBullets() {
 		Iterator<Bullet> iter = back.getBullets().iterator();  
-		while(iter.hasNext()){
+		while(iter.hasNext() && gameOn){
 			Bullet b = iter.next();
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 		
 		Iterator<BasicEnemyBullet> iter2 = back.getEnemyBullets().iterator();  
-		while(iter2.hasNext()){
+		while(iter2.hasNext() && gameOn){
 			BasicEnemyBullet b = iter2.next();
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
@@ -104,12 +110,15 @@ public class GameViewController {
 	
 	private void drawEnemy() {
 		Iterator<BasicEnemy> iter = back.getEnemies().iterator();  
-		while(iter.hasNext()){
+		while(iter.hasNext() && gameOn){
 			BasicEnemy e = iter.next();
 			gc.drawImage(e.getSprite(),e.getX(), e.getY());
 		}
 	}
-
+	
+	public void stop() {
+		gameOn = false;
+	}
 	
 	@FXML
 	void keyPressed(KeyEvent key) {
@@ -127,13 +136,6 @@ public class GameViewController {
 	    	back.getFighter().stopShoot();
 	    }
 	}
-	
-	private void playSound(String file){
-		Media sound = new Media(new File("files/sounds/" + file).toURI().toString());
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setVolume(0.45);
-		mediaPlayer.play();
-	}
 
 	public void updateStats() {
 		Platform.runLater(new Runnable() {
@@ -141,8 +143,26 @@ public class GameViewController {
 			public void run() {
 				scoreLabel.setText(back.getScore() + " puntos");
 				lifeBar.setImage(new Image("file:files/ui/life" + back.getLife() + ".png"));
+				levelLabel.setText("Nivel " + back.getLevel());
 			}
 		});
 
+	}
+
+	public void addTop() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				TextInputDialog dialog = new TextInputDialog("");
+				dialog.setTitle("Estás en el top 5");
+				dialog.setHeaderText(null);
+				dialog.setContentText("Ingrese el nombre del jugador:");
+
+				Optional<String> result = dialog.showAndWait();
+				if (result.isPresent()){
+					main.getRegistry().add(result.get(), back.getScore());
+				}	
+			}
+		});
 	}
 }

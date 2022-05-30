@@ -11,6 +11,9 @@ public class Bullet {
 	private float speed;
 	private float x;
 	private float y;
+	public void setExists(boolean exists) {
+		this.exists = exists;
+	}
 	private boolean exists;
 	private ArrayList<Bullet> parent;
 	private Image sprite;

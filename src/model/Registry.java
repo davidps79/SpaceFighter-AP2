@@ -38,7 +38,7 @@ public class Registry {
 	
 	public void add(String name,int score) {
 		Player player= new Player(name, score);
-		if (players.size()==5) {
+		if (players.size()==10) {
 			if (player.getScore()>players.get(0).getScore()) {
 				players.remove(0);
 				players.add(player);
@@ -46,9 +46,15 @@ public class Registry {
 		}else {
 			players.add(player);
 		}
-		Collections.sort(players);
+		Collections.sort(players, Collections.reverseOrder());
 		saveScore();
 		
+	}
+	
+	public boolean check(int score) {
+		if (players.size()<10 || players.get(players.size()-1).getScore()<score) {
+			return true;
+		} else return false;
 	}
 	
 	public void saveScore() {

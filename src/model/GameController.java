@@ -2,10 +2,12 @@ package model;
 
 import java.io.File;
 import java.util.ArrayList;
+import application.Main;
 import controller.GameViewController;
 import javafx.scene.media.AudioClip;
 
 public class GameController {
+	private Main main;
 	private Fighter fighter;
 	private ArrayList<BasicEnemy> enemies;
 	private ArrayList<BasicEnemyBullet> enemyBullets;
@@ -15,12 +17,17 @@ public class GameController {
 	private int enemyAmount;
 	private int enemyCounter;
 	private int score;
+	private int scoreLevel;
 	private int shootLevel;
 	private int movementLevel;
+	private int level;
 	
-	public GameController() {
-		this.shootLevel = 4;
-		this.movementLevel = 3000;
+	public GameController(Main main) {
+		this.level =1;
+		this.main = main;
+		this.scoreLevel = 1;
+		this.shootLevel = 18;
+		this.movementLevel = 4000;
 		this.enemyAmount = 12;
 		this.enemyCounter = enemyAmount;
 		this.life = 3;
@@ -73,7 +80,7 @@ public class GameController {
 	
 	public void addScore() {
 		this.enemyCounter--;
-		this.score++;
+		this.score+=scoreLevel;
 		this.gameViewController.updateStats();
 		
 		if (enemyCounter<1) nextLevel();
@@ -81,8 +88,16 @@ public class GameController {
 	
 	private void nextLevel() {
 		playSound("respawn.wav", 1);
-		enemyAmount += 4;
+		level++;
+		movementLevel -= 100;
+		shootLevel -= 1;
+		
+		if (level%3==0) {
+			enemyAmount += 2;
+		}
+
 		enemyCounter = enemyAmount;
+		scoreLevel += 1;
 		spawnEnemies();
 	}
 	
@@ -116,7 +131,33 @@ public class GameController {
 		gameViewController.updateStats();
 		
 		if (life<1) {
-			System.out.println("END");
+			endGame();
 		}
+	}
+	
+	public void endGame() {
+		gameViewController.stop();
+		life = 0;
+		
+		fighter.stop();
+		for (BasicEnemy e : enemies) {
+			e.setExists(false);
+		}
+		
+		for (Bullet b : bullets) {
+			b.setExists(false);
+		}
+		
+		for (BasicEnemyBullet b : enemyBullets) {
+			b.setExists(false);
+		}
+		
+		if (main.getRegistry().check(score)) gameViewController.addTop();
+		
+		main.endGame();
+	}
+
+	public String getLevel() {
+		return level + "";
 	}
 }

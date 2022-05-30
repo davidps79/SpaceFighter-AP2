@@ -5,6 +5,7 @@ import controller.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.GameController;
 import model.Registry;
 import javafx.scene.Scene;
@@ -22,11 +23,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {	
 		this.registry = new Registry();
-		currentStage = primaryStage;
-		primaryStage.show();
-		openMenu();
 		
-		/*try {
+		try {
 			playBackgroundMusic("MenuMusic.wav");
 			currentStage = primaryStage;
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("StartupView.fxml"));
@@ -39,13 +37,20 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	public void openGame() {
 		try {
-			back = new GameController();
+			back = new GameController(this);
 			mediaPlayer.stop();
+			mediaPlayer.setOnEndOfMedia(new Runnable() {
+		        @Override
+		        public void run() {
+		        	mediaPlayer.seek(Duration.ZERO);
+		        	mediaPlayer.play();
+		        }
+		    }); 
 			playBackgroundMusic("BattleMusic.mp3");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("GameView.fxml"));
 			BorderPane root = (BorderPane) loader.load();
@@ -108,5 +113,11 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void endGame() {
+		back.getFighter().stop();
+		back = null;
+		openMenu();
 	}
 }

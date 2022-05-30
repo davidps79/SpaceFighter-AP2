@@ -1,10 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.concurrent.TimeUnit;
-
 import javafx.scene.image.Image;
 
 public class BasicEnemy {
@@ -15,6 +12,10 @@ public class BasicEnemy {
 	private ArrayList<BasicEnemyBullet> bullets;
 	private GameController controller;
 	private Image sprite;
+	public void setExists(boolean exists) {
+		this.exists = exists;
+	}
+
 	private boolean exists;
 	private int prob;
 	private int speed;
@@ -89,17 +90,17 @@ public class BasicEnemy {
 	}
 	
 	public int random() {
-		return (int) (Math.random() * (prob + 1 - 1)) + 1;
+		return (int) (Math.random() * (prob)) + 1;
 	}
 	
 	public int random1() {
-		return (int) (Math.random() * (3000 + 1 - 1)) + 1;
+		return (int) (Math.random() * (3000)) + 1;
 	}
 	
 	public void shoot() {
 		if(exists) {
 			int shoot=random();
-			if (shoot==1) {
+			if (shoot>=1 && shoot<=2) {
 				Thread timer = new Thread(() -> {
 					try {
 						TimeUnit.MILLISECONDS.sleep(random1());
@@ -118,7 +119,8 @@ public class BasicEnemy {
 	}
 	
 	public void startShoot() {
-		bullets.add(new BasicEnemyBullet((float) (getX()+sprite.getWidth()/2), getY()-10, controller));
+		if (exists)
+			bullets.add(new BasicEnemyBullet((float) (getX()+sprite.getWidth()/2), getY()-10, controller));
 	}
 
 	public int getX() {
@@ -145,18 +147,12 @@ public class BasicEnemy {
 		this.sprite = sprite;
 	}
 	
-	public void shootTime(int originY) {
-		double distance = 760-originY;
-		double speed= 18/25;
-		double time=distance/speed ;
-	}
-
 	public void destroy() {
 		this.exists=false;
 	}
 	
 	public void collisionsEnemy() {
-		
+		if (y+sprite.getHeight() > 750) {
 			Fighter ft= controller.getFighter();
 			float x_1=ft.getX();
 			float x_2=ft.getX()+77;
@@ -164,14 +160,10 @@ public class BasicEnemy {
 			float y_2=ft.getY()+80;
 
 			if((x+93)>=x_1 && (x+93)<=x_2 && y+80<=y_2 && y+80>=y_1) {
-				controller.setLife(0);
-				System.out.println("Moriste");
-			}else if((x)>=x_1 && (x)<=x_2 && y+80<=y_2 && y+80>=y_1) {
-				controller.setLife(0);
-				System.out.println("Moriste");
+				controller.endGame();
+			} else if((x)>=x_1 && (x)<=x_2 && y+80<=y_2 && y+80>=y_1) {
+				controller.endGame();
 			}
-			
 		}	
-		
-	
+	}	
 }
