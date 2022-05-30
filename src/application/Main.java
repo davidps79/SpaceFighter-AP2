@@ -25,8 +25,9 @@ public class Main extends Application {
 		this.registry = new Registry();
 		
 		try {
-			playBackgroundMusic("MenuMusic.wav");
+			playBackgroundMusic("MenuMusic.wav", 1f);
 			currentStage = primaryStage;
+			currentStage.setTitle("Space Adventure");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("StartupView.fxml"));
 			BorderPane root = (BorderPane) loader.load();
 			StartupController controller = loader.getController();
@@ -44,7 +45,19 @@ public class Main extends Application {
 		try {
 			back = new GameController(this);
 			mediaPlayer.stop(); 
-			playBackgroundMusic("BattleMusic.mp3");
+			playBackgroundMusic("BattleMusic.mp3", 0.5f);
+			
+			Runnable onEnd = new Runnable() {
+	            @Override
+	            public void run() {
+	            	Media sound = new Media(new File("files/sounds/" + "BattleMusic.mp3").toURI().toString());
+	            	mediaPlayer.dispose();
+	            	mediaPlayer = new MediaPlayer(sound);
+	            	mediaPlayer.play();
+	            	mediaPlayer.setOnEndOfMedia(this);
+	            }
+	        };
+	        mediaPlayer.setOnEndOfMedia(onEnd);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("GameView.fxml"));
 			BorderPane root = (BorderPane) loader.load();
 			GameViewController controller = loader.getController();
@@ -82,9 +95,10 @@ public class Main extends Application {
 		return back;
 	}
 	
-	private void playBackgroundMusic(String file){
+	private void playBackgroundMusic(String file, float volume){
 		Media sound = new Media(new File("files/sounds/" + file).toURI().toString());
 		mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setVolume(volume);
 		mediaPlayer.setVolume(0.8f);
 		mediaPlayer.setVolume(0.45);
 		mediaPlayer.play();
@@ -111,6 +125,8 @@ public class Main extends Application {
 	public void endGame() {
 		back.getFighter().stop();
 		back = null;
+		mediaPlayer.stop();
+		playBackgroundMusic("BattleMusic.mp3", 0.5f);
 		openMenu();
 	}
 }

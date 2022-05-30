@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 import javafx.scene.image.Image;
 
 public class BasicEnemy {

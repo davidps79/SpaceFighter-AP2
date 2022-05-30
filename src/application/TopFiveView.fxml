@@ -17,7 +17,7 @@
                   <Image url="@../../files/ui/topView.png" />
                </image>
             </ImageView>
-            <TextArea fx:id="area" layoutX="286.0" layoutY="250.0" prefHeight="426.0" prefWidth="630.0" style="-fx-background-color: transparent;">
+            <TextArea fx:id="area" editable="false" layoutX="286.0" layoutY="250.0" prefHeight="426.0" prefWidth="630.0" style="-fx-background-color: transparent;">
                <padding>
                   <Insets left="30.0" right="30.0" />
                </padding></TextArea>

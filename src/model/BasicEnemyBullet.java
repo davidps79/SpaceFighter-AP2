@@ -1,8 +1,8 @@
 package model;
 
 import java.io.File;
+
 import java.util.ArrayList;
-import java.util.Queue;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

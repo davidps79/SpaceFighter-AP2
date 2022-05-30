@@ -89,7 +89,7 @@ public class GameController {
 	private void nextLevel() {
 		playSound("respawn.wav", 1);
 		level++;
-		movementLevel -= 100;
+		movementLevel -= 250;
 		shootLevel -= 1;
 		
 		if (level%3==0) {

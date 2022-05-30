@@ -164,7 +164,7 @@ public class GameViewController {
 			@Override
 			public void run() {
 				TextInputDialog dialog = new TextInputDialog("");
-				dialog.setTitle("Estás en el top 5");
+				dialog.setTitle("Estás en el top 10");
 				dialog.setHeaderText(null);
 				dialog.setContentText("Ingrese el nombre del jugador:");
 
