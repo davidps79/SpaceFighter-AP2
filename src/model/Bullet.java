@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -59,9 +60,12 @@ public class Bullet {
 	}
 	
 	private void playSound(){
-		Media sound = new Media(new File("files/sounds/shoot" + random(0,2) + ".wav").toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
+        try {
+            AudioClip clip = new AudioClip(new File("files/sounds/shoot" + random(0,2) + ".wav").toURI().toString());
+            clip.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public int random(int min, int max) {

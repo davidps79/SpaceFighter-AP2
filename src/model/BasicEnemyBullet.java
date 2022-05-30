@@ -62,7 +62,7 @@ public class BasicEnemyBullet {
 	}
 	
 	private void playSound(){
-		Media sound = new Media(new File("files/sounds/shoot" + random(0,2) + ".wav").toURI().toString());
+		Media sound = new Media(new File("files/sounds/laserShoot.wav").toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
 	}

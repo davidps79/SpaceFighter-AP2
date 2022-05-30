@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.util.Iterator;
 
 import application.Main;
 import javafx.application.Platform;
@@ -88,17 +89,23 @@ public class GameViewController {
 	}
 	
 	public void drawBullets() {
-		for (Bullet b : back.getBullets()) {
+		Iterator<Bullet> iter = back.getBullets().iterator();  
+		while(iter.hasNext()){
+			Bullet b = iter.next();
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 		
-		for (BasicEnemyBullet b : back.getEnemyBullets()) {
+		Iterator<BasicEnemyBullet> iter2 = back.getEnemyBullets().iterator();  
+		while(iter2.hasNext()){
+			BasicEnemyBullet b = iter2.next();
 			gc.drawImage(b.getSprite(), b.getX(), b.getY());
 		}
 	}
 	
 	private void drawEnemy() {
-		for (BasicEnemy e : back.getEnemies()) {
+		Iterator<BasicEnemy> iter = back.getEnemies().iterator();  
+		while(iter.hasNext()){
+			BasicEnemy e = iter.next();
 			gc.drawImage(e.getSprite(),e.getX(), e.getY());
 		}
 	}

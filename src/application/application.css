@@ -33,3 +33,11 @@
 #exitButton:pressed {
 	-fx-background-image: url('file:files/ui/exitButton3.png');
 }
+
+.text-area {
+    -fx-text-fill: #b8fffe;
+}
+
+.text-area .content {
+    -fx-background-color: transparent;
+}

@@ -1,7 +1,6 @@
 package application;
 	
 import java.io.File;
-
 import controller.*;
 import javafx.application.Application;
 import javafx.application.Platform;
