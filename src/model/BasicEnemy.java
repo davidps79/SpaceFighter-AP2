@@ -42,7 +42,7 @@ public class BasicEnemy {
 				int movement= (1200-x)/80;
 				for (int i = 0; i < movement-1 && exists; i++) {
 					try {
-						TimeUnit.MILLISECONDS.sleep(speed);
+						Thread.sleep(speed);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -54,7 +54,7 @@ public class BasicEnemy {
 				}
 				//System.out.print("\n");
 				try {
-					TimeUnit.MILLISECONDS.sleep(speed);
+					Thread.sleep(speed);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -67,7 +67,7 @@ public class BasicEnemy {
 				int movement2= (int) ((1200-sprite.getWidth())/80);
 				for (int i = 0; i < movement2 && exists; i++) {
 					try {
-						TimeUnit.MILLISECONDS.sleep(speed);
+						Thread.sleep(speed);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -103,7 +103,7 @@ public class BasicEnemy {
 			if (shoot>=1 && shoot<=2) {
 				Thread timer = new Thread(() -> {
 					try {
-						TimeUnit.MILLISECONDS.sleep(random1());
+						Thread.sleep(random1());
 						startShoot();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block

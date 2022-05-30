@@ -67,11 +67,8 @@ public class GameViewController {
 		Thread th = new Thread(() -> {
 			while(gameOn) {
 				try {
-					Thread.sleep(1000/100);
-					gc.clearRect(0, 0, 1200, 900);
-					drawBullets();
-					drawFighter();
-					drawEnemy();
+					Thread.sleep(10);
+					draw();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,7 +77,20 @@ public class GameViewController {
 		th.setDaemon(true);
 		th.start();
 	}
-
+	
+	private void draw() {
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				gc.clearRect(0, 0, 1200, 900);
+				drawBullets();
+				drawFighter();
+				drawEnemy();	
+			}
+		});
+	}
+	
 	@FXML
 	public void initialize() {
 		scoreLabel.setFont(Font.loadFont("file:files/ui/GamePlayed.otf", 18));

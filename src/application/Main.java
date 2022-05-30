@@ -43,14 +43,7 @@ public class Main extends Application {
 	public void openGame() {
 		try {
 			back = new GameController(this);
-			mediaPlayer.stop();
-			mediaPlayer.setOnEndOfMedia(new Runnable() {
-		        @Override
-		        public void run() {
-		        	mediaPlayer.seek(Duration.ZERO);
-		        	mediaPlayer.play();
-		        }
-		    }); 
+			mediaPlayer.stop(); 
 			playBackgroundMusic("BattleMusic.mp3");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("GameView.fxml"));
 			BorderPane root = (BorderPane) loader.load();
