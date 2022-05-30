@@ -19,16 +19,14 @@ public class Main extends Application {
 	private Stage currentStage;
 	
 	@Override
-	public void start(Stage primaryStage) {
-		//back = new GameController();
-			
+	public void start(Stage primaryStage) {			
 		try {
 			playBackgroundMusic("MenuMusic.wav");
 			currentStage = primaryStage;
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("StartupView.fxml"));
 			BorderPane root = (BorderPane) loader.load();
 			StartupController controller = loader.getController();
-			controller.setMain(this);
+			controller.setMain(this);			
 			Scene scene = new Scene(root, 1200, 900);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -40,9 +38,13 @@ public class Main extends Application {
 	
 	public void openGame() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Sample.fxml"));
+			back = new GameController();
+			mediaPlayer.stop();
+			playBackgroundMusic("BattleMusic.mp3");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("GameView.fxml"));
 			BorderPane root = (BorderPane) loader.load();
-			SampleController controller = loader.getController();
+			GameViewController controller = loader.getController();
+			back.setGameView(controller);
 			controller.setMain(this);
 			Scene scene = new Scene(root, 1200, 900);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -83,5 +85,4 @@ public class Main extends Application {
 		mediaPlayer.setVolume(0.45);
 		mediaPlayer.play();
 	}
-	
 }

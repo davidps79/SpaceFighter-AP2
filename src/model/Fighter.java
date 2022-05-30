@@ -20,12 +20,10 @@ public class Fighter {
 	private float yAdjust;
 	private Thread startShooting;
 	private Thrust thrust;
-	private int lifes;
 	private int score;
 	private GameController controller;
 	
 	public Fighter(float x, float y, GameController controller) {
-		this.lifes = 3;
 		this.dx = 1f;
 		this.acceleration = 0.6f;
 		this.controller= controller;
@@ -43,15 +41,6 @@ public class Fighter {
 		this.x = x - xAdjust;
 		this.y = y - yAdjust;
 		this.thrust = new Thrust();
-	}
-	
-	public int getLifes() {
-		return lifes;
-	}
-
-	public void lostLife() {
-		if (lifes>1) this.lifes--;
-		else System.out.println("GAME OVER");
 	}
 	
 	public float getX() {

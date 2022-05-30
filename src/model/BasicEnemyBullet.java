@@ -82,9 +82,8 @@ public class BasicEnemyBullet {
 
 		if(x>=x_1 && x<=x_2 && y>=y_1 && y<=y_1+80) {
 			parent.remove(this);
-			controller.getFighter().lostLife();
+			controller.lostLife();
 			exists = false;
-			
 		}
 	}
 }

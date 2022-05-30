@@ -145,14 +145,12 @@ public class Bullet {
 				exists= false;
 				controller.getFighter().setScore(1);
 				i.destroy();
+				controller.addScore();
 				controller.getEnemies().remove(i);
 				break;
 			}
 			
-		}
-		
-		
-		
+		}	
 
 	}
 }
